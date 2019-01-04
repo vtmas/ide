@@ -1,0 +1,24 @@
+# set -g default-terminal "screen-256color"
+
+#set -g @plugin 'tmux-plugins/tmux-yank'
+#set -g @yank_selection_mouse 'primary' # or 'primary' or 'secondary'
+#set -g @shell_mode 'vi'
+#set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+
+# Use the xterm-256color terminal
+set -g default-terminal "xterm-256color"
+
+# Apply Tc
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# resolve target terminal to send escape sequence
+# if we are on remote machine, send directly to SSH_TTY to transport escape sequence
+# to terminal on local machine, so data lands in clipboard on our local machine
+
+set -g status-position bottom
+#set-option -g mouse on
+setw -g mode-keys vi
+bind r source-file ${HOME}/.tmux.conf \; display-message "Source-file reloaded"
+run -b '~/.tmux/plugins/tpm/tpm'
+
+
